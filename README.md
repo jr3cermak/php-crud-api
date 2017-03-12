@@ -1,9 +1,11 @@
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/mevdschee/php-crud-api.svg)](http://isitmaintained.com/project/mevdschee/php-crud-api "Average time to resolve an issue")
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/mevdschee/php-crud-api.svg)](http://isitmaintained.com/project/mevdschee/php-crud-api "Percentage of issues still open")
-
 # PHP-CRUD-API
 
 Single file PHP script that adds a REST API to a MySQL 5.6 InnoDB database. PostgreSQL 9.1 and MS SQL Server 2012 are fully supported. There is even limited support for SQLite 3.
+
+NOTE: This repo is a clone of the original repository.  Branches:
+  - master : development branch
+  - bugfix : should stay in sync with original master for bugfixes
+  - apiKey : apiKey support for swagger.io
 
 Related projects:
 
@@ -103,6 +105,8 @@ $api = new PHP_CRUD_API(array(
 	'get'=>$_GET,
 	'post'=>file_get_contents('php://input'),
 	'origin'=>$_SERVER['HTTP_ORIGIN'],
+// Use to pass security PHP object from PHP_API_AUTH to PHP_CRUD_API
+	'security'=>null,
 ));
 $api->executeCommand();
 ```
