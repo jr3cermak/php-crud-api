@@ -1808,19 +1808,19 @@ class PHP_CRUD_API {
 	}
 
 	protected function convertTypes($result,&$values,&$fields) {
-		array_walk($values, function(&$v,$i) use ($result,$fields){
+		foreach ($values as $i=>$v) {
 			if (is_string($v)) {
 				if ($this->db->isNumericType($fields[$i])) {
-					$v+=0;
+					$values[$i] = $v + 0;
 				}
 				else if ($this->db->isBinaryType($fields[$i])) {
-					$v=base64_encode(hex2bin($v));
+					$values[$i] = base64_encode(pack("H*",$v));
 				}
 				else if ($this->db->isJsonType($fields[$i])) {
-					$v=$this->db->jsonDecode($v);
+					$values[$i] = $this->db->jsonDecode($v);
 				}
 			}
-		});
+		}
 	}
 
 	protected function fetchAssoc($result,$fields=false) {
@@ -1873,25 +1873,22 @@ class PHP_CRUD_API {
 		if ($tenancy_function) $this->applyTenancyFunction($tenancy_function,$action,$database,$fields,$filters);
 		if ($column_authorizer) $this->applyColumnAuthorizer($column_authorizer,$action,$database,$fields);
 
-		$multi = strpos($key[0],',')!==false;
-		$inputs = array();
-		if (strlen($post)) {
-			// input
-			$multi = $post[0]=='[';
-			$contexts = $this->retrieveInputs($post);
-			if ($before) {
-				$this->applyBeforeHandler($action,$database,$tables[0],$key[0],$before,$contexts);
-			}
-			foreach ($contexts as $context) {
-				$input = $this->filterInputByFields($context,$fields[$tables[0]]);
+		// input
+		$multi = (strpos($key[0],',')!==false) || (strlen($post)?($post[0]=='['):false);
+		$inputs = $this->retrieveInputs($post);
+		if ($before) {
+			$this->applyBeforeHandler($action,$database,$tables[0],$key[0],$before,$inputs);
+		}
+		
+		foreach ($inputs as $k=>$context) {
+			$input = $this->filterInputByFields($context,$fields[$tables[0]]);
 
-				if ($tenancy_function) $this->applyInputTenancy($tenancy_function,$action,$database,$tables[0],$input,$fields[$tables[0]]);
-				if ($input_sanitizer) $this->applyInputSanitizer($input_sanitizer,$action,$database,$tables[0],$input,$fields[$tables[0]]);
-				if ($input_validator) $this->applyInputValidator($input_validator,$action,$database,$tables[0],$input,$fields[$tables[0]],$context);
+			if ($tenancy_function) $this->applyInputTenancy($tenancy_function,$action,$database,$tables[0],$input,$fields[$tables[0]]);
+			if ($input_sanitizer) $this->applyInputSanitizer($input_sanitizer,$action,$database,$tables[0],$input,$fields[$tables[0]]);
+			if ($input_validator) $this->applyInputValidator($input_validator,$action,$database,$tables[0],$input,$fields[$tables[0]],$context);
 
-				$this->convertInputs($input,$fields[$tables[0]]);
-				$inputs[] = $input;
-			}
+			$this->convertInputs($input,$fields[$tables[0]]);
+			$inputs[$k] = $input;
 		}
 
 		return compact('action','database','tables','key','page','filters','fields','orderings','transform','multi','inputs','collect','select','before','after');
