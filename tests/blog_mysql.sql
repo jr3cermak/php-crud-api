@@ -126,6 +126,7 @@ CREATE TABLE `products` (
   `price` decimal(10,2) NOT NULL,
   `properties` JSON NOT NULL,
   `created_at` datetime NOT NULL,
+  `deleted_at` datetime NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
