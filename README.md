@@ -11,7 +11,7 @@ Related projects:
 
   - [PHP-API-AUTH](https://github.com/mevdschee/php-api-auth): Authentication add-on supporting JWT or username/password.
   - [PHP-SP-API](https://github.com/mevdschee/php-sp-api): Single file PHP script that adds a REST API to a SQL database.
-  - [PHP-CRUD-UI](https://github.com/mevdschee/php-crud-ui): Single file PHP script that adds a UI to a PHP-CRUD-API project.
+  - [Vue-CRUD-UI](https://github.com/nlware/vue-crud-ui): Single file Vue.js script that adds a UI to a PHP-CRUD-API project.
 
 ## Requirements
 
@@ -22,6 +22,8 @@ Related projects:
 ## Installation
 
 This is a single file application! Upload "api.php" somewhere and enjoy!
+
+Alternatively, you can use [Composer](https://getcomposer.org/). See the _Composer Installation_ section below.
 
 ## Limitations
 
@@ -1031,6 +1033,39 @@ string(6) "/posts"
 ```
 
 If it does not, something is wrong on your hosting environment.
+
+## Composer Installation
+
+- Include the library in your composer.json file:
+
+```json
+{
+    "require": {
+        "mevdschee/php-crud-api": "dev-master"
+    }
+}
+```
+
+- Run `composer install`
+- Use the library in your own code:
+
+```php
+<?php
+
+include './vendor/autoload.php';
+
+// DB Connection
+$api = new PHP_CRUD_API(array(
+ 	'dbengine'=>'MySQL',
+ 	'hostname'=>'localhost',
+ 	'username'=>'',
+ 	'password'=>'',
+	'database'=>'',
+	'charset'=>'utf8'
+));
+$api->executeCommand();
+
+```
 
 ## License
 
