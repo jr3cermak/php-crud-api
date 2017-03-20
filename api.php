@@ -2261,11 +2261,11 @@ class PHP_CRUD_API {
 			$this->db->close($result);
 		}
 
+		$table_names = array_map(function($v){ return $v['name'];},$tables);
 		foreach ($tables as $t=>$table)	{
 			$table_list = array($table['name']);
 			$table_fields = $this->findFields($table_list,false,false,false,$database);
-			$table_names = array_map(function($v){ return $v['name'];},$tables);
-
+			
 			// extensions
 			$result = $this->db->query($this->db->getSql('reflect_belongs_to'),array($table_list[0],$table_names,$database,$database));
 			while ($row = $this->db->fetchRow($result)) {
@@ -2436,7 +2436,7 @@ class PHP_CRUD_API {
 							}
 							echo ',"x-dbtype": '.json_encode($action['fields'][$field]->{'x-dbtype'});
 							echo ',"x-nullable": '.json_encode($action['fields'][$field]->{'x-nullable'});
-							if (isset($action['fields'][$field]->maxLength)) {
+							if (isset($action['fields'][$field]->maxLength) && $action['fields'][$field]->maxLength>0) {
 								echo ',"maxLength": '.json_encode($action['fields'][$field]->maxLength);
 							}
 							if (isset($action['fields'][$field]->default)) {
