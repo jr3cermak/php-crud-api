@@ -2,10 +2,16 @@
 
 Single file PHP script that adds a REST API to a MySQL 5.6 InnoDB database. PostgreSQL 9.1 and MS SQL Server 2012 are fully supported. There is even limited support for SQLite 3.
 
-NOTE: This repo is a clone of the original repository.  Branches:
-  - master : development branch
-  - bugfix : should stay in sync with original master for bugfixes
-  - apiKey : apiKey support for swagger.io
+NOTE: This repo is a fork of the original repository.  The upstream master is actually the bugfix
+branch.  All features are in the master branch.   If you want a specific feature, you can merge in
+one or more of the specific enhancements onto the bugfix branch.  Releases are from the master branch
+which contain all the enhancements. 
+
+Branches:
+  - master : A merge of all enhancements (releases are based off this branch)
+  - bugfix : Follows the upstream master
+    - apiKey : branch of bugfix; apiKey support for the Open API (swagger.io) specification
+    - sqlSrv : branch of bugfix; SQL Server specific enhancements
 
 Related projects:
 
@@ -61,6 +67,10 @@ Alternatively, you can use [Composer](https://getcomposer.org/). See the _Compos
   - Unstructured data support through JSON/JSONB/XML
   - Generate API documentation using Swagger tools
   - Authentication via JWT token or username/password (via [PHP-API-AUTH](https://github.com/mevdschee/php-api-auth))
+  - Authentication via API key as per Open API specification
+  - SQL Server changes/enhancements
+    - Boolean field support
+    - Type 3 is numeric
 
 ## Configuration
 
