@@ -2627,7 +2627,7 @@ class PHP_CRUD_API {
 			}
 		}
 		echo '}'; //paths
-			echo '}'; //end swagger defintion
+			echo '}'; //end swagger definition
 	}
 
 	protected function allowOrigin($origin,$allowOrigins) {
