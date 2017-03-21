@@ -2362,6 +2362,7 @@ class PHP_CRUD_API {
 					$fields = $table_fields;
 					if ($table_authorizer) $this->applyTableAuthorizer($table_authorizer,$action['name'],$database,$table_list);
 					if ($column_authorizer) $this->applyColumnAuthorizer($column_authorizer,$action['name'],$database,$fields);
+					if (!$table_list || !$fields[$table['name']]) $tables[$t][$path][$i] = false;
 					else $tables[$t][$path][$i]['fields'] = $fields[$table['name']];
 				}
 				// remove unauthorized tables and tables without fields
