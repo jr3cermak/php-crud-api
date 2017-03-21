@@ -9,7 +9,15 @@ Related projects:
 
   - [PHP-API-AUTH](https://github.com/mevdschee/php-api-auth): Authentication add-on supporting JWT or username/password.
   - [PHP-SP-API](https://github.com/mevdschee/php-sp-api): Single file PHP script that adds a REST API to a SQL database.
-  - [Vue-CRUD-UI](https://github.com/nlware/vue-crud-ui): Single file Vue.js script that adds a UI to a PHP-CRUD-API project.
+  - [PHP-CRUD-UI](https://github.com/mevdschee/PHP-crud-ui): Single file PHP script that adds a UI to a PHP-CRUD-API project.
+  - [VUE-CRUD-UI](https://github.com/nlware/vue-crud-ui): Single file Vue.js script that adds a UI to a PHP-CRUD-API project.
+  
+There are also ports of this script in:
+[Java](https://github.com/mevdschee/java-crud-api/blob/master/src/main/java/com/tqdev/CrudApiHandler.java),
+[Go](https://github.com/mevdschee/go-crud-api/blob/master/api.go),
+[C# .net core](https://github.com/mevdschee/core-data-api/blob/master/Program.cs) and
+[Node.js](https://github.com/mevdschee/js-crud-api/blob/master/app.js).
+These implementations are a proof-of-concept and do only support basic REST CRUD functionality.
 
 ## Requirements
 
@@ -1032,7 +1040,7 @@ If it does not, something is wrong on your hosting environment.
 
 ## Composer Installation
 
-- Include the library in your composer.json file:
+Include the library in your composer.json file:
 
 ```json
 {
@@ -1042,8 +1050,7 @@ If it does not, something is wrong on your hosting environment.
 }
 ```
 
-- Run `composer install`
-- Use the library in your own code:
+Run `composer install` and then to use the library in your own code like this:
 
 ```php
 <?php
